@@ -1,0 +1,12 @@
+URLs :
+
+1. http://localhost:8080/webApp/addEmployee(student)
+2. http://localhost:8080/webApp/retrieveEmployee/10(student)
+3. http://localhost:8080/webApp/employees(student)
+4. http://localhost:8080/webApp/deleteEmployee/1(student)
+5. http://localhost:8080/webApp/h2-console/login.jsp?jsessionid=77f184b7b073f19172c872db84504104 - to access DB
+
+##We can use @Entity and @Table with @ID,@Column or we can use data.sql with queries to access db
+
+INSERT INTO EMPLOYEES(ID,EMAIL,F_NAME,L_NAME) VALUES (1,'nakavepratik@gmail.com','PRATIK','NAKAVE')
+SELECT * FROM EMPLOYEES
