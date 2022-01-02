@@ -58,7 +58,8 @@ public class EmployeeController {
 	public void addEmployee() throws Exception {
 		System.out.println("Adding an employee");
 		long id = employeeService.getAllEmployees().size();
-		Employee emp = new Employee(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com");
+		Employee emp = new Employee(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com",
+				Util.imageGenerator());
 		employeeService.createOrUpdateEmployee(emp);
 	}
 //	@PostMapping(value="/add")
@@ -73,7 +74,8 @@ public class EmployeeController {
 	
 	@RequestMapping("/insertEmployee")
 	public void insertEmployee() {
-		empList.add(new Employee(id++,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com"));
+		empList.add(new Employee(id++,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com", 
+				Util.imageGenerator()));
 		System.out.println("Employee added");
 	}
 	

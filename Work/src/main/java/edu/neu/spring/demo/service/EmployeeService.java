@@ -56,6 +56,7 @@ public class EmployeeService {
             newEntity.setfName(entity.getfName());
             newEntity.setlName(entity.getlName());
             newEntity.setemail(entity.getemail());
+            newEntity.setCategoryPhoto(entity.getCategoryPhoto());
             newEntity = employeeRepository.save(newEntity);
              
             return newEntity;

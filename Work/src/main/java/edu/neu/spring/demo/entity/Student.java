@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -20,13 +21,17 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID")
 	private long Id;
-	@Column(name = "fName")
+	@Column(name = "FIRST_NAME")
 	private String fName;
-	@Column(name = "lName")
+	@Column(name = "LAST_NAME")
 	private String lName;
-	@Column(name = "email")
+	@Column(name = "STUD_EMAIL")
 	private String email;
+	@Lob
+	@Column(name="CATEGORY_PHOTO")
+	private byte[] categoryPhoto;
 	
 	public Student() {
 		
@@ -38,12 +43,13 @@ public class Student {
 	 * @param lName
 	 * @param email
 	 */
-	public Student(long Id, String fName, String lName, String email) {
+	public Student(long Id, String fName, String lName, String email, byte[] categoryPhoto) {
 		super();
 		this.Id = Id;
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		this.categoryPhoto = categoryPhoto;
 	}
 	
 	public long getId() {
@@ -69,6 +75,12 @@ public class Student {
 	}
 	public void setemail(String email) {
 		this.email = email;
+	}
+	public byte[] getCategoryPhoto() {
+		return categoryPhoto;
+	}
+	public void setCategoryPhoto(byte[] categoryPhoto) {
+		categoryPhoto = categoryPhoto;
 	}
 
 	@Override

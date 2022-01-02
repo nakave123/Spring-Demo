@@ -3,6 +3,9 @@
  */
 package edu.neu.spring.demo;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -36,5 +39,38 @@ public class Util {
 	    //generate random values from 0-50
 	    int int_random = rand.nextInt(upperbound);
 		return int_random;
+	}
+	
+	public static byte[] imageGenerator() {
+		int width = 100;
+	     int height = 100;
+	     //create buffered image object img
+	     java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(width, height, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+	     //file object
+	     File f = null;
+	     //create random image pixel by pixel
+	     for(int y = 0; y < height; y++){
+	       for(int x = 0; x < width; x++){
+	         int a = (int)(Math.random()*256); //alpha
+	         int r = (int)(Math.random()*256); //red
+	         int g = (int)(Math.random()*256); //green
+	         int b = (int)(Math.random()*256); //blue
+	 
+	         int p = (a<<24) | (r<<16) | (g<<8) | b; //pixel
+	 
+	         img.setRGB(x, y, p);
+	       }
+	     }
+	     //write image
+	     try{
+	       //f = new File("/Users/pratiknakave/Downloads/Ethics_Group.jpeg");
+	       f = new File(nameGenerator()+".jpg");
+	       javax.imageio.ImageIO.write(img, "png", f);
+	       System.out.println("Image Name : "+f.toPath().toString());
+	       return Files.readAllBytes(f.toPath());
+	     }catch(IOException e){
+	       System.out.println("Error: " + e);
+	     }
+	     return null;
 	}
 }

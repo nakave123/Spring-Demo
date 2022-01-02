@@ -56,6 +56,7 @@ public class StudentService {
             newEntity.setfName(entity.getfName());
             newEntity.setlName(entity.getlName());
             newEntity.setemail(entity.getemail());
+            newEntity.setCategoryPhoto(entity.getCategoryPhoto());
             newEntity = studentRepository.save(newEntity);
              
             return newEntity;

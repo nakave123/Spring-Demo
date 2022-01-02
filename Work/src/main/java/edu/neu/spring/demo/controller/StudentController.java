@@ -46,7 +46,8 @@ public class StudentController {
 	public void addStudent() throws Exception {
 		System.out.println("Adding a student");
 		long id = studentService.getAllStudents().size();
-		Student emp = new Student(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com");
+		Student emp = new Student(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com",
+				Util.imageGenerator());
 		studentService.createOrUpdateStudent(emp);
 	}
 
