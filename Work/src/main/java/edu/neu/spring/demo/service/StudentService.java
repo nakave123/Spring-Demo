@@ -47,16 +47,17 @@ public class StudentService {
 	
 	public Student createOrUpdateStudent(Student entity) throws Exception 
     {
-        Optional<Student> employee = studentRepository.findById(entity.getId());
+        Optional<Student> employee = studentRepository.findById(entity.getsId());
          
         if(employee.isPresent()) 
         {
         	Student newEntity = employee.get();
-            newEntity.setId(entity.getId());
+            newEntity.setsId(entity.getsId());
             newEntity.setfName(entity.getfName());
             newEntity.setlName(entity.getlName());
             newEntity.setemail(entity.getemail());
             newEntity.setCategoryPhoto(entity.getCategoryPhoto());
+            newEntity.setCategoryFile(entity.getCategoryFile());
             newEntity = studentRepository.save(newEntity);
              
             return newEntity;

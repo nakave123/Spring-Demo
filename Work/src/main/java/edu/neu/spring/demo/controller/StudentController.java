@@ -47,7 +47,7 @@ public class StudentController {
 		System.out.println("Adding a student");
 		long id = studentService.getAllStudents().size();
 		Student emp = new Student(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com",
-				Util.imageGenerator());
+				Util.imageGenerator(),Util.fileGenerator());
 		studentService.createOrUpdateStudent(emp);
 	}
 

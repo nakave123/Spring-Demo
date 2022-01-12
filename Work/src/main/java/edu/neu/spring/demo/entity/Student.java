@@ -21,8 +21,8 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ID")
-	private long Id;
+	@Column(name="SID")
+	private long sId;
 	@Column(name = "FIRST_NAME")
 	private String fName;
 	@Column(name = "LAST_NAME")
@@ -32,6 +32,9 @@ public class Student {
 	@Lob
 	@Column(name="CATEGORY_PHOTO")
 	private byte[] categoryPhoto;
+	@Lob
+	@Column(name="CATEGORY_CV")
+	private byte[] categoryFile;
 	
 	public Student() {
 		
@@ -43,20 +46,21 @@ public class Student {
 	 * @param lName
 	 * @param email
 	 */
-	public Student(long Id, String fName, String lName, String email, byte[] categoryPhoto) {
+	public Student(long Id, String fName, String lName, String email, byte[] categoryPhoto, byte[] categoryFile) {
 		super();
-		this.Id = Id;
+		this.sId = Id;
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
 		this.categoryPhoto = categoryPhoto;
+		this.categoryFile = categoryFile;
 	}
 	
-	public long getId() {
-		return Id;
+	public long getsId() {
+		return sId;
 	}
-	public void setId(long Id) {
-		this.Id = Id;
+	public void setsId(long Id) {
+		this.sId = Id;
 	}
 	public String getfName() {
 		return fName;
@@ -82,10 +86,16 @@ public class Student {
 	public void setCategoryPhoto(byte[] categoryPhoto) {
 		categoryPhoto = categoryPhoto;
 	}
+	public byte[] getCategoryFile() {
+		return categoryFile;
+	}
+	public void setCategoryFile(byte[] categoryFile) {
+		this.categoryFile = categoryFile;
+	}
 
 	@Override
 	public String toString() {
-		return "Student [Id=" + Id + ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
+		return "Student [Id=" + sId + ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
 	}
 
 }

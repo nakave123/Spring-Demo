@@ -21,8 +21,8 @@ public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ID")
-	private long Id;
+	@Column(name="EID")
+	private long eId;
 	@Column(name = "FIRST_NAME")
 	private String fName;
 	@Column(name = "LAST_NAME")
@@ -32,6 +32,11 @@ public class Employee {
 	@Lob
 	@Column(name="CATEGORY_PHOTO")
 	private byte[] categoryPhoto;
+	@Lob
+	@Column(name="CATEGORY_CV")
+	private byte[] categoryFile;
+	@Column(name = "LINKEDIN_LINK")
+	private String linkedInLink;
 
 	public Employee() {
 		
@@ -43,20 +48,21 @@ public class Employee {
 	 * @param lName
 	 * @param email
 	 */
-	public Employee(long Id, String fName, String lName, String email, byte[] categoryPhoto) {
+	public Employee(long Id, String fName, String lName, String email, byte[] categoryPhoto, byte[] categoryFile) {
 		super();
-		this.Id = Id;
+		this.eId = Id;
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
 		this.categoryPhoto = categoryPhoto;
+		this.categoryFile = categoryFile;
 	}
 	
-	public long getId() {
-		return Id;
+	public long geteId() {
+		return eId;
 	}
-	public void setId(long Id) {
-		this.Id = Id;
+	public void seteId(long Id) {
+		this.eId = Id;
 	}
 	public String getfName() {
 		return fName;
@@ -82,10 +88,23 @@ public class Employee {
 	public void setCategoryPhoto(byte[] categoryPhoto) {
 		categoryPhoto = categoryPhoto;
 	}
+	public byte[] getCategoryFile() {
+		return categoryFile;
+	}
+	public void setCategoryFile(byte[] categoryFile) {
+		this.categoryFile = categoryFile;
+	}
+	public String getLinkedInLink() {
+		return linkedInLink;
+	}
+	public void setLinkedInLink(String linkedInLink) {
+		this.linkedInLink = linkedInLink;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Employee [Id=" + Id + ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
+		return "Employee [Id=" + eId + ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
 	}
 	
 	

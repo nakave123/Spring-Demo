@@ -47,16 +47,18 @@ public class EmployeeService {
 	
 	public Employee createOrUpdateEmployee(Employee entity) throws Exception 
     {
-        Optional<Employee> employee = employeeRepository.findById(entity.getId());
+        Optional<Employee> employee = employeeRepository.findById(entity.geteId());
          
         if(employee.isPresent()) 
         {
             Employee newEntity = employee.get();
-            newEntity.setId(entity.getId());
+            newEntity.seteId(entity.geteId());
             newEntity.setfName(entity.getfName());
             newEntity.setlName(entity.getlName());
             newEntity.setemail(entity.getemail());
+            newEntity.setLinkedInLink(entity.getLinkedInLink());
             newEntity.setCategoryPhoto(entity.getCategoryPhoto());
+            newEntity.setCategoryFile(entity.getCategoryFile());
             newEntity = employeeRepository.save(newEntity);
              
             return newEntity;

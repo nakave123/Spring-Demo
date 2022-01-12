@@ -7,15 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import edu.neu.spring.demo.Util;
 import edu.neu.spring.demo.entity.Employee;
+import edu.neu.spring.demo.entity.SignInRequest;
 import edu.neu.spring.demo.service.EmployeeService;
 
 /**
@@ -32,6 +39,17 @@ public class EmployeeController {
 	List<Employee> empList = new ArrayList<>();
 	private int id = 1;
 	
+	@SuppressWarnings("deprecation")
+	@Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return (WebMvcConfigurer) new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
+    }
+	
 	
 //	@GetMapping("/allEmployees")
 //	   public ResponseEntity<Object> getProduct() {
@@ -39,6 +57,7 @@ public class EmployeeController {
 //	      return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
 //	   }
 	
+	//@CrossOrigin(origins = "http://localhost:8080/webApp/employees", allowedHeaders = "*")
 	@GetMapping("/employees")
 	public List<Employee> getEmployees(){
 		System.out.println("Get all Employees called");
@@ -55,11 +74,12 @@ public class EmployeeController {
 		employeeService.deleteEmployeeById(id);
 	}
 	@PostMapping("/addEmployee")
-	public void addEmployee() throws Exception {
+	public void addEmployee(@RequestBody SignInRequest request) throws Exception {
 		System.out.println("Adding an employee");
 		long id = employeeService.getAllEmployees().size();
-		Employee emp = new Employee(id+1,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com",
-				Util.imageGenerator());
+		//TODO Add LinkedInLink here
+		Employee emp = new Employee(id+1, request.getfName(), request.getlName(), request.getEmail(), 
+				Util.imageGenerator(), Util.fileGenerator());
 		employeeService.createOrUpdateEmployee(emp);
 	}
 //	@PostMapping(value="/add")
@@ -75,7 +95,7 @@ public class EmployeeController {
 	@RequestMapping("/insertEmployee")
 	public void insertEmployee() {
 		empList.add(new Employee(id++,Util.nameGenerator(),Util.nameGenerator(),Util.nameGenerator()+"@gmail.com", 
-				Util.imageGenerator()));
+				Util.imageGenerator(),Util.fileGenerator()));
 		System.out.println("Employee added");
 	}
 	

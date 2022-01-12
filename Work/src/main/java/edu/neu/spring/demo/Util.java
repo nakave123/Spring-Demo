@@ -3,7 +3,10 @@
  */
 package edu.neu.spring.demo;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashSet;
@@ -42,8 +45,8 @@ public class Util {
 	}
 	
 	public static byte[] imageGenerator() {
-		int width = 100;
-	     int height = 100;
+		int width = 500;
+	     int height = 500;
 	     //create buffered image object img
 	     java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(width, height, java.awt.image.BufferedImage.TYPE_INT_ARGB);
 	     //file object
@@ -66,11 +69,64 @@ public class Util {
 	       //f = new File("/Users/pratiknakave/Downloads/Ethics_Group.jpeg");
 	       f = new File(nameGenerator()+".jpg");
 	       javax.imageio.ImageIO.write(img, "png", f);
-	       System.out.println("Image Name : "+f.toPath().toString());
+	       System.out.println("Image Location : "+f.toPath().toString());
 	       return Files.readAllBytes(f.toPath());
 	     }catch(IOException e){
 	       System.out.println("Error: " + e);
 	     }
 	     return null;
+	}
+	
+	public static byte[] fileGenerator() {
+		int filesize = 129 * 1024;
+		//int count = 9500;
+		File dir = new File("/Users/pratiknakave/Downloads/");
+		String ext = ".txt";
+		
+		byte[] bytes = new byte[filesize];
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        
+        try {
+            //for (int i = 0; i < count; i++) {
+                Random rand = new Random();
+                System.out.println("Into Try block setting name");
+                String name = String.format("%s%s", System.currentTimeMillis(), rand.nextInt(100000) + ext);
+                File file = new File(dir, name);
+ 
+                fos = new FileOutputStream(file);
+                bos = new BufferedOutputStream(fos);
+ 
+                rand.nextBytes(bytes);
+                bos.write(bytes);
+ 
+                bos.flush();
+                bos.close();
+                fos.flush();
+                fos.close();
+                System.out.println("Finished writing a file");
+                return Files.readAllBytes(file.toPath());
+            //}
+ 
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("File not found" + fnfe);
+        } catch (IOException ioe) {
+            System.out.println("Error while writing to file" + ioe);
+        } finally {
+            try {
+                if (bos != null) {
+                    bos.flush();
+                    bos.close();
+                }
+                if (fos != null) {
+                    fos.flush();
+                    fos.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error while closing streams" + e);
+            }
+        }
+		
+		return null;
 	}
 }
